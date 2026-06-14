@@ -9,6 +9,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.DeleteOutline
 import androidx.compose.material.icons.filled.FitnessCenter
+import androidx.compose.material.icons.filled.History
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -26,6 +27,7 @@ import com.ladystoneco.plangym.ui.util.SectionHeader
 @Composable
 fun WorkoutListScreen(
     onOpenRoutine: (Long) -> Unit,
+    onOpenHistory: () -> Unit,
     viewModel: WorkoutViewModel = hiltViewModel()
 ) {
     val routines: List<RoutineEntity> by viewModel.routines.collectAsState()
@@ -40,6 +42,11 @@ fun WorkoutListScreen(
                         style = MaterialTheme.typography.headlineSmall,
                         fontWeight = FontWeight.Black
                     ) 
+                },
+                actions = {
+                    IconButton(onClick = onOpenHistory) {
+                        Icon(Icons.Default.History, contentDescription = null)
+                    }
                 }
             )
         },

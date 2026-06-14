@@ -55,6 +55,9 @@
     <string name="habit_list">لیست عادت‌ها</string>
     <string name="no_routines">هنوز روتینی نساخته‌اید.</string>
     <string name="workout_details">جزئیات تمرین</string>
+    <string name="workout_history">تاریخچه تمرین</string>
+    <string name="quick_actions">دسترسی سریع</string>
+    <string name="start_workout">شروع تمرین</string>
     <string name="rest">استراحت</string>
     <string name="remaining_time">زمان باقی‌مانده</string>
 </resources>

@@ -30,7 +30,7 @@ fun WorkoutHistoryScreen(
     onBack: () -> Unit,
     viewModel: WorkoutViewModel = hiltViewModel()
 ) {
-    val sessions by viewModel.sessions.collectAsState(initial = emptyList())
+    val sessions by viewModel.sessions.collectAsState()
     val homeViewModel: HomeViewModel = hiltViewModel()
     val homeState by homeViewModel.uiState.collectAsState()
 
@@ -52,7 +52,7 @@ fun WorkoutHistoryScreen(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             item {
-                SectionHeader(title = "تاریخچه تمرین") // TODO: Move to strings.xml
+                SectionHeader(title = stringResource(R.string.workout_history))
                 Spacer(Modifier.height(4.dp))
             }
 
@@ -68,7 +68,7 @@ fun WorkoutHistoryScreen(
                     }
                 }
             } else {
-                items(sessions) { session ->
+                items(sessions, key = { it.id }) { session ->
                     HistoryItem(session = session, locale = homeState.locale)
                 }
             }

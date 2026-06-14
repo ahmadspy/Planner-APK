@@ -14,6 +14,7 @@ import com.ladystoneco.plangym.ui.home.HomeScreen
 import com.ladystoneco.plangym.ui.planner.PlannerScreen
 import com.ladystoneco.plangym.ui.planner.ProjectDetailScreen
 import com.ladystoneco.plangym.ui.workout.RoutineDetailScreen
+import com.ladystoneco.plangym.ui.workout.WorkoutHistoryScreen
 import com.ladystoneco.plangym.ui.workout.WorkoutListScreen
 
 @Composable
@@ -58,7 +59,16 @@ fun PlangymRoot() {
                 WorkoutListScreen(
                     onOpenRoutine = { routineId ->
                         navController.navigate(Destination.RoutineDetail.createRoute(routineId))
+                    },
+                    onOpenHistory = {
+                        navController.navigate(Destination.WorkoutHistory.route)
                     }
+                )
+            }
+
+            composable(Destination.WorkoutHistory.route) {
+                WorkoutHistoryScreen(
+                    onBack = { navController.popBackStack() }
                 )
             }
 

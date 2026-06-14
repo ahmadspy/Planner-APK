@@ -55,6 +55,9 @@
     <string name="habit_list">Habit List</string>
     <string name="no_routines">No routines created yet.</string>
     <string name="workout_details">Workout Details</string>
+    <string name="workout_history">Workout History</string>
+    <string name="quick_actions">Quick Actions</string>
+    <string name="start_workout">Start Workout</string>
     <string name="rest">Rest</string>
     <string name="remaining_time">Remaining Time</string>
 </resources>

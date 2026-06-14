@@ -12,6 +12,7 @@ sealed class Destination(val route: String) {
     data object Planner : Destination("planner")
     data object Habit : Destination("habit")
     data object Workout : Destination("workout")
+    data object WorkoutHistory : Destination("workout_history")
     data object ProjectDetail : Destination("project/{projectId}") {
         const val ARG_PROJECT_ID = "projectId"
         fun createRoute(projectId: Long) = "project/$projectId"
