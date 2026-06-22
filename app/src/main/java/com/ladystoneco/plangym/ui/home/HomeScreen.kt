@@ -21,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -41,6 +42,7 @@ fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
+    val quotes = stringArrayResource(R.array.quotes)
 
     Scaffold(
         topBar = {
@@ -54,7 +56,7 @@ fun HomeScreen(
                 },
                 actions = {
                     IconButton(onClick = { viewModel.nextTheme() }) {
-                        Icon(Icons.Default.ColorLens, contentDescription = "Change Theme")
+                        Icon(Icons.Default.ColorLens, contentDescription = stringResource(R.string.change_theme))
                     }
                     IconButton(onClick = { viewModel.toggleLanguage() }) {
                         Icon(Icons.Default.Language, contentDescription = stringResource(R.string.language))
@@ -76,12 +78,14 @@ fun HomeScreen(
         ) {
             item {
                 Spacer(Modifier.height(8.dp))
-                Text(
-                    text = uiState.greeting,
-                    style = MaterialTheme.typography.displaySmall,
-                    fontWeight = FontWeight.Black,
-                    color = MaterialTheme.colorScheme.onBackground
-                )
+                if (uiState.greetingResId != 0) {
+                    Text(
+                        text = stringResource(uiState.greetingResId),
+                        style = MaterialTheme.typography.displaySmall,
+                        fontWeight = FontWeight.Black,
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
+                }
                 Spacer(Modifier.height(8.dp))
                 GlassCard(modifier = Modifier.fillMaxWidth()) {
                     Row(
@@ -96,7 +100,7 @@ fun HomeScreen(
                             )
                             Spacer(Modifier.height(4.dp))
                             Text(
-                                text = uiState.quote,
+                                text = quotes.getOrElse(uiState.quoteIndex) { "" },
                                 style = MaterialTheme.typography.bodyLarge,
                                 fontWeight = FontWeight.Bold,
                                 lineHeight = 26.sp

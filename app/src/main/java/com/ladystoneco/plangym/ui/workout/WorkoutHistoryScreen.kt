@@ -98,7 +98,7 @@ fun HistoryItem(session: WorkoutSessionEntity, locale: String) {
                 shape = RoundedCornerShape(8.dp)
             ) {
                 Text(
-                    text = LocalizationManager.formatNumbers("${session.durationSeconds / 60} min", locale),
+                    text = stringResource(R.string.minutes_unit, session.durationSeconds / 60),
                     modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
                     style = MaterialTheme.typography.labelSmall,
                     fontWeight = FontWeight.Bold,

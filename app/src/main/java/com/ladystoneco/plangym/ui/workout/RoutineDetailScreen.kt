@@ -23,6 +23,7 @@ import com.ladystoneco.plangym.R
 import com.ladystoneco.plangym.data.local.entity.WorkoutSetEntity
 import com.ladystoneco.plangym.data.local.relation.ExerciseWithSets
 import com.ladystoneco.plangym.ui.util.ModernCard
+import com.ladystoneco.plangym.util.LocalizationManager
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -32,6 +33,9 @@ fun RoutineDetailScreen(
 ) {
     val exercises: List<ExerciseWithSets> by viewModel.exercises.collectAsState()
     val restTimer by viewModel.restTimerState.collectAsState()
+    val totalVolume by viewModel.totalVolume.collectAsState()
+    val homeViewModel: com.ladystoneco.plangym.ui.home.HomeViewModel = hiltViewModel()
+    val homeState by homeViewModel.uiState.collectAsState()
     var showAddExercise by remember { mutableStateOf(false) }
     var setTargetExerciseId by remember { mutableStateOf<Long?>(null) }
 
@@ -66,14 +70,24 @@ fun RoutineDetailScreen(
         }
     ) { padding ->
         Column(modifier = Modifier.padding(padding).fillMaxSize()) {
-            if (restTimer.isRunning) {
-                com.ladystoneco.plangym.ui.util.RestTimerCard(
-                    remainingSeconds = restTimer.remainingSeconds,
-                    totalSeconds = restTimer.totalSeconds,
-                    modifier = Modifier.padding(horizontal = 20.dp, vertical = 8.dp)
+            Row(
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 8.dp),
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                com.ladystoneco.plangym.ui.util.MetricCard(
+                    label = stringResource(R.string.total_volume),
+                    value = LocalizationManager.formatNumbers(totalVolume.toInt().toString(), homeState.locale),
+                    modifier = Modifier.weight(1f)
                 )
-            } else {
-                WorkoutTimer(modifier = Modifier.padding(horizontal = 20.dp, vertical = 16.dp))
+                if (restTimer.isRunning) {
+                    com.ladystoneco.plangym.ui.util.RestTimerCard(
+                        remainingSeconds = restTimer.remainingSeconds,
+                        totalSeconds = restTimer.totalSeconds,
+                        modifier = Modifier.weight(1.5f)
+                    )
+                } else {
+                    WorkoutTimer(modifier = Modifier.weight(1.5f))
+                }
             }
             
             LazyColumn(

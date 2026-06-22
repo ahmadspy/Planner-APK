@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import java.time.LocalDate
@@ -41,6 +42,12 @@ class RoutineDetailViewModel @Inject constructor(
                 started = SharingStarted.WhileSubscribed(5_000),
                 initialValue = emptyList()
             )
+
+    val totalVolume: StateFlow<Float> = exercises.map { list ->
+        list.sumOf { ex ->
+            ex.sets.filter { it.isCompleted }.sumOf { (it.weight ?: 0f) * (it.reps ?: 0).toDouble() }
+        }.toFloat()
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), 0f)
 
     private val _restTimerState = MutableStateFlow(RestTimerState())
     val restTimerState = _restTimerState.asStateFlow()

@@ -60,4 +60,18 @@
     <string name="start_workout">شروع تمرین</string>
     <string name="rest">استراحت</string>
     <string name="remaining_time">زمان باقی‌مانده</string>
+    <string name="change_theme">تغییر تم</string>
+    <string name="minutes_unit">%1$d دقیقه</string>
+    <string name="rest_seconds_label">زمان استراحت (ثانیه)</string>
+    <string name="good_morning">صبح بخیر</string>
+    <string name="good_afternoon">عصر بخیر</string>
+    <string name="good_evening">شب بخیر</string>
+    <string name="total_volume">حجم کل (کیلوگرم)</string>
+    <string-array name="quotes">
+        <item>موفقیت مجموع تلاش‌های کوچکی است که هر روز تکرار می‌شوند.</item>
+        <item>نظم پل بین اهداف و دستاوردهاست.</item>
+        <item>امروز کاری انجام بده که در آینده از خودت تشکر کنی.</item>
+        <item>سخت‌کوشی هیچ جایگزینی ندارد.</item>
+        <item>توانایی شما برای یادگیری سریع‌تر از رقبایتان، تنها مزیت رقابتی پایدار شماست.</item>
+    </string-array>
 </resources>

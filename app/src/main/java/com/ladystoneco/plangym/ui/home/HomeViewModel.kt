@@ -22,7 +22,7 @@ import java.time.LocalDate
 import javax.inject.Inject
 
 data class HomeUiState(
-    val quote: String = "",
+    val quoteIndex: Int = 0,
     val today: LocalDate = LocalDate.now(),
     val totalTasks: Int = 0,
     val completedTasks: Int = 0,
@@ -30,7 +30,7 @@ data class HomeUiState(
     val completedHabits: Int = 0,
     val locale: String = "fa",
     val theme: AppTheme = AppTheme.GLASS_VIOLET,
-    val greeting: String = ""
+    val greetingResId: Int = 0
 )
 
 @HiltViewModel
@@ -62,17 +62,15 @@ class HomeViewModel @Inject constructor(
         val todayEpoch = LocalDate.now().toEpochDay()
         val completedHabitsCount = logs.count { it.dateEpochDay == todayEpoch && it.isCompleted }
         
-        val quotes = if (locale == "fa") quotesFa else quotesEn
-        
         val hour = java.time.LocalTime.now().hour
-        val greeting = when {
-            hour < 12 -> if (locale == "fa") "صبح بخیر" else "Good Morning"
-            hour < 18 -> if (locale == "fa") "عصر بخیر" else "Good Afternoon"
-            else -> if (locale == "fa") "شب بخیر" else "Good Evening"
+        val greetingResId = when {
+            hour < 12 -> com.ladystoneco.plangym.R.string.good_morning
+            hour < 18 -> com.ladystoneco.plangym.R.string.good_afternoon
+            else -> com.ladystoneco.plangym.R.string.good_evening
         }
         
         HomeUiState(
-            quote = quotes[quoteIdx % quotes.size],
+            quoteIndex = quoteIdx,
             today = LocalDate.now(),
             totalTasks = tasks.size,
             completedTasks = tasks.count { it.isDone },
@@ -80,28 +78,12 @@ class HomeViewModel @Inject constructor(
             completedHabits = completedHabitsCount,
             locale = locale,
             theme = theme,
-            greeting = greeting
+            greetingResId = greetingResId
         )
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5_000),
         initialValue = HomeUiState()
-    )
-
-    private val quotesFa = listOf(
-        "موفقیت مجموع تلاش‌های کوچکی است که هر روز تکرار می‌شوند.",
-        "نظم پل بین اهداف و دستاوردهاست.",
-        "امروز کاری انجام بده که در آینده از خودت تشکر کنی.",
-        "سخت‌کوشی هیچ جایگزینی ندارد.",
-        "توانایی شما برای یادگیری سریع‌تر از رقبایتان، تنها مزیت رقابتی پایدار شماست."
-    )
-
-    private val quotesEn = listOf(
-        "Success is the sum of small efforts repeated day in and day out.",
-        "Discipline is the bridge between goals and accomplishment.",
-        "Do something today that your future self will thank you for.",
-        "There is no substitute for hard work.",
-        "Your ability to learn faster than your competitors is your only sustainable competitive advantage."
     )
 
     fun refreshQuote() {

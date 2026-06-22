@@ -60,4 +60,18 @@
     <string name="start_workout">Start Workout</string>
     <string name="rest">Rest</string>
     <string name="remaining_time">Remaining Time</string>
+    <string name="change_theme">Change Theme</string>
+    <string name="minutes_unit">%1$d min</string>
+    <string name="rest_seconds_label">Rest Time (seconds)</string>
+    <string name="good_morning">Good Morning</string>
+    <string name="good_afternoon">Good Afternoon</string>
+    <string name="good_evening">Good Evening</string>
+    <string name="total_volume">Total Volume (kg)</string>
+    <string-array name="quotes">
+        <item>Success is the sum of small efforts repeated day in and day out.</item>
+        <item>Discipline is the bridge between goals and accomplishment.</item>
+        <item>Do something today that your future self will thank you for.</item>
+        <item>There is no substitute for hard work.</item>
+        <item>Your ability to learn faster than your competitors is your only sustainable competitive advantage.</item>
+    </string-array>
 </resources>

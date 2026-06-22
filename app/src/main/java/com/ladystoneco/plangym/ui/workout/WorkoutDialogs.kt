@@ -69,7 +69,7 @@ fun AddExerciseDialog(
                 )
                 OutlinedTextField(
                     value = restSec, onValueChange = { restSec = it },
-                    label = { Text("زمان استراحت (ثانیه)") }, singleLine = true,
+                    label = { Text(stringResource(R.string.rest_seconds_label)) }, singleLine = true,
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(12.dp)
