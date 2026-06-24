@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -14,6 +16,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.ladystoneco.plangym.R
 
 @Composable
@@ -79,6 +82,9 @@ fun MetricCard(
     color: Color = MaterialTheme.colorScheme.primary,
     modifier: Modifier = Modifier
 ) {
+    val homeViewModel: com.ladystoneco.plangym.ui.home.HomeViewModel = hiltViewModel()
+    val homeState by homeViewModel.uiState.collectAsState()
+    
     ModernCard(
         modifier = modifier,
         containerColor = color.copy(alpha = 0.1f)
@@ -93,14 +99,15 @@ fun MetricCard(
             Spacer(Modifier.height(8.dp))
             Row(verticalAlignment = Alignment.Bottom) {
                 Text(
-                    text = value,
+                    text = com.ladystoneco.plangym.util.LocalizationManager.formatNumbers(value, homeState.locale),
                     style = MaterialTheme.typography.headlineLarge,
                     fontWeight = FontWeight.Black,
                     color = color
                 )
                 if (unit.isNotBlank()) {
+                    val displayUnit = if (unit == "kg") stringResource(R.string.kg_unit) else unit
                     Text(
-                        text = " $unit",
+                        text = " $displayUnit",
                         style = MaterialTheme.typography.labelSmall,
                         color = color.copy(alpha = 0.7f),
                         modifier = Modifier.padding(bottom = 6.dp)

@@ -56,12 +56,12 @@ fun WorkoutTimer(modifier: Modifier = Modifier) {
             
             Row {
                 IconButton(onClick = { seconds = 0; isRunning = false }) {
-                    Icon(Icons.Default.Refresh, contentDescription = "Reset")
+                    Icon(Icons.Default.Refresh, contentDescription = stringResource(R.string.reset))
                 }
                 FilledIconButton(onClick = { isRunning = !isRunning }) {
                     Icon(
                         if (isRunning) Icons.Default.Pause else Icons.Default.PlayArrow,
-                        contentDescription = "Start/Pause"
+                        contentDescription = stringResource(R.string.start_pause)
                     )
                 }
             }

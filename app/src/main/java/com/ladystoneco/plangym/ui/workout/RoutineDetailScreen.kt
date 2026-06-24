@@ -162,7 +162,7 @@ private fun ModernExerciseCard(
                     shape = CircleShape
                 ) {
                     Text(
-                        "${item.sets.count { it.isCompleted }}/${item.sets.size}",
+                        stringResource(R.string.sets_ratio, item.sets.count { it.isCompleted }, item.sets.size),
                         style = MaterialTheme.typography.labelMedium,
                         modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp)
                     )
