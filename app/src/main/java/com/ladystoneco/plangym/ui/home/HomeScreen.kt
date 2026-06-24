@@ -39,6 +39,8 @@ import java.util.*
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
+    onNavigateToPlanner: () -> Unit,
+    onNavigateToWorkout: () -> Unit,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -154,15 +156,15 @@ fun HomeScreen(
                     horizontalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     QuickActionCard(
-                        title = stringResource(R.string.new_task),
+                        title = stringResource(R.string.tasks),
                         icon = Icons.Default.Add,
-                        onClick = { /* TODO */ },
+                        onClick = onNavigateToPlanner,
                         modifier = Modifier.weight(1f)
                     )
                     QuickActionCard(
                         title = stringResource(R.string.start_workout),
                         icon = Icons.Default.PlayArrow,
-                        onClick = { /* TODO */ },
+                        onClick = onNavigateToWorkout,
                         modifier = Modifier.weight(1f)
                     )
                 }

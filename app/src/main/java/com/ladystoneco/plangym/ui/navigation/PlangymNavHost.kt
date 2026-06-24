@@ -29,7 +29,10 @@ fun PlangymRoot() {
             modifier = Modifier.padding(innerPadding)
         ) {
             composable(Destination.Home.route) {
-                HomeScreen()
+                HomeScreen(
+                    onNavigateToPlanner = { navController.navigate(Destination.Planner.route) },
+                    onNavigateToWorkout = { navController.navigate(Destination.Workout.route) }
+                )
             }
 
             composable(Destination.Planner.route) {
